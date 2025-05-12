@@ -14,7 +14,7 @@ public class ProcessosSeletivos {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PROCESSOS_SELETIVOS")
     @SequenceGenerator(name = "SEQ_PROCESSOS_SELETIVOS", sequenceName = "SEQ_PROCESSOS_SELETIVOS", allocationSize = 1)
     @Column(name = "idProcesso")
-    private String idProcesso;
+    private Long idProcesso;
     private String setor;
     private Integer numeroCandidatos;
     private Integer numeroFases;

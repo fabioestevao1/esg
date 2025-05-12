@@ -13,7 +13,7 @@ public class Candidatos {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CANDIDATOS")
     @SequenceGenerator(name = "SEQ_CANDIDATOS", sequenceName = "SEQ_CANDIDATOS", allocationSize = 1)
     @Column(name = "idCandidato")
-    private String idCandidato;
+    private Long idCandidato;
     private String nome;
     private String email;
     private String telefone;

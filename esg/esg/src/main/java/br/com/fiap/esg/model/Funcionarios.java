@@ -14,7 +14,7 @@ public class Funcionarios {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_FUNCIONARIOS")
     @SequenceGenerator(name = "SEQ_FUNCIONARIOS", sequenceName = "SEQ_FUNCIONARIOS", allocationSize = 1)
     @Column(name = "idFuncionario")
-    private String idFuncionario;
+    private Long idFuncionario;
     private String nome;
     private String email;
     private String telefone;

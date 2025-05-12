@@ -12,7 +12,7 @@ public class ProcessoCandidatos {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PROCESSO_CANDIDATOS")
     @SequenceGenerator(name = "SEQ_PROCESSO_CANDIDATOS", sequenceName = "SEQ_PROCESSO_CANDIDATOS", allocationSize = 1)
     @Column(name = "idProcessoCandidato")
-    private String idProcessoCandidato;
+    private Long idProcessoCandidato;
     private String faseAtual;
     private String status;
 }
