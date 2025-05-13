@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tbl_processos_seletivos")
 @Data
-public class ProcessosSeletivos {
+public class ProcessoSeletivo {
 
 
     @Id

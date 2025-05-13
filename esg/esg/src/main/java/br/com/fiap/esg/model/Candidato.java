@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tbl_candidatos")
 @Data
-public class Candidatos {
+public class Candidato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CANDIDATOS")

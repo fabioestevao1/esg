@@ -37,7 +37,7 @@ CREATE SEQUENCE SEQ_PROCESSO_CANDIDATOS
 
 
 CREATE TABLE tbl_funcionarios (
-                                  id_funcionario NUMBER DEFAULT SEQ_FUNCIONARIOS.nextval NOT NULL PRIMARY KEY,
+                                  id_funcionarios NUMBER DEFAULT SEQ_FUNCIONARIOS.nextval NOT NULL PRIMARY KEY,
                                   nome VARCHAR2(40),
                                   email VARCHAR2(40),
                                   telefone VARCHAR2(40),
@@ -51,7 +51,7 @@ CREATE TABLE tbl_funcionarios (
 
 
 CREATE TABLE tbl_treinamentos (
-                              id_treinamento NUMBER DEFAULT SEQ_TREINAMENTOS.nextval NOT NULL PRIMARY KEY,
+                              id_treinamentos NUMBER DEFAULT SEQ_TREINAMENTOS.nextval NOT NULL PRIMARY KEY,
                               nome VARCHAR2(40),
                               descricao VARCHAR2(40),
                               data_inicio DATE,
@@ -62,7 +62,7 @@ CREATE TABLE tbl_treinamentos (
 
 
 CREATE TABLE tbl_processos_seletivos (
-                                     id_processo NUMBER DEFAULT SEQ_PROCESSOS_SELETIVOS.nextval NOT NULL PRIMARY KEY,
+                                     id_processos NUMBER DEFAULT SEQ_PROCESSOS_SELETIVOS.nextval NOT NULL PRIMARY KEY,
                                      setor VARCHAR2(40),
                                      numero_candidatos NUMBER,
                                      numero_fases NUMBER,
@@ -71,7 +71,7 @@ CREATE TABLE tbl_processos_seletivos (
 
 
 CREATE TABLE tbl_candidatos (
-                           id_candidato NUMBER DEFAULT SEQ_CANDIDATOS.nextval NOT NULL PRIMARY KEY,
+                           id_candidatos NUMBER DEFAULT SEQ_CANDIDATOS.nextval NOT NULL PRIMARY KEY,
                            nome VARCHAR2(40),
                            email VARCHAR2(40),
                            telefone VARCHAR2(40),
@@ -89,8 +89,8 @@ CREATE TABLE tbl_participacao (
                               status VARCHAR2(40),
                               id_funcionario NUMBER,
                               id_treinamento NUMBER,
-                              CONSTRAINT fk_participacao_funcionario FOREIGN KEY (id_funcionario) REFERENCES tbl_funcionarios(id_funcionario),
-                              CONSTRAINT fk_participacao_treinamento FOREIGN KEY (id_treinamento) REFERENCES treinamentos(id_treinamento)
+                              CONSTRAINT fk_participacao_funcionario FOREIGN KEY (id_funcionarios) REFERENCES tbl_funcionarios(id_funcionarios),
+                              CONSTRAINT fk_participacao_treinamento FOREIGN KEY (id_treinamentos) REFERENCES treinamentos(id_treinamentos)
 );
 
 
@@ -98,8 +98,8 @@ CREATE TABLE tbl_processo_candidatos (
                                      id_processo_candidato NUMBER DEFAULT SEQ_PROCESSO_CANDIDATOS.nextval NOT NULL PRIMARY KEY,
                                      fase_atual VARCHAR2(40),
                                      Status VARCHAR2(40),
-                                     id_candidato NUMBER,
+                                     id_candidatos NUMBER,
                                      id_processo_seletivo NUMBER,
-                                     CONSTRAINT fk_proc_cand_candidato FOREIGN KEY (id_candidato) REFERENCES candidato(id_candidato),
+                                     CONSTRAINT fk_proc_cand_candidato FOREIGN KEY (id_candidatos) REFERENCES candidato(id_candidato),
                                      CONSTRAINT fk_proc_cand_processo FOREIGN KEY (id_processo_seletivo) REFERENCES processos_seletivos(id_processo)
 );

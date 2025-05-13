@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table (name = "tbl_treinamentos")
 @Data
-public class Treinamentos {
+public class Treinamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TREINAMENTOS")

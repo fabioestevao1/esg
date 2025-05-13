@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tbl_funcionarios")
 @Data
-public class Funcionarios {
+public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_FUNCIONARIOS")
