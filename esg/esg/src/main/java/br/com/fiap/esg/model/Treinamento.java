@@ -1,7 +1,7 @@
 package br.com.fiap.esg.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+        import lombok.Data;
 
 import java.time.LocalDate;
 
@@ -20,5 +20,7 @@ public class Treinamento {
     private String descricao;
     private LocalDate dataInicio;
     private LocalDate dataFim;
+
+    @Column(length = 1)
     private String obrigatorio;
 }
