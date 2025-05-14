@@ -1,46 +1,56 @@
-
 package br.com.fiap.esg.controller;
 
-import br.com.fiap.esg.model.Treinamento;
+import br.com.fiap.esg.dto.TreinamentoDTO;
 import br.com.fiap.esg.service.TreinamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-// import java.util.List; // Descomente se for usar o método de listar todos
+import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/treinamentos")
 public class TreinamentoController {
 
     @Autowired
     private TreinamentoService treinamentoService;
 
-    @PostMapping("/treinamentos")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Treinamento adicionarTreinamento(@RequestBody Treinamento treinamento){
-        return treinamentoService.salvarTreinamento(treinamento);
+    @GetMapping
+    public ResponseEntity<List<TreinamentoDTO>> listarTodos() {
+        List<TreinamentoDTO> treinamentos = treinamentoService.listarTodos();
+        return ResponseEntity.ok(treinamentos);
     }
 
-    @GetMapping("/treinamentos/{treinamentoId}")
-    public Treinamento buscarTreinamento(@PathVariable Long treinamentoId){
-        return treinamentoService.buscarTreinamento(treinamentoId);
+    @GetMapping("/{id}")
+    public ResponseEntity<TreinamentoDTO> buscarPorId(@PathVariable Long id) {
+        TreinamentoDTO treinamento = treinamentoService.buscarPorId(id);
+        return ResponseEntity.ok(treinamento);
     }
 
-    // @GetMapping("/treinamentos")
-    // public List<Treinamento> listarTreinamentos(){
-    //     return treinamentoService.buscarTreinamentos();
-    // }
-
-    @DeleteMapping("/treinamentos/{treinamentoId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirTreinamento(@PathVariable Long treinamentoId){
-        treinamentoService.excluirTreinamento(treinamentoId);
+    @PostMapping
+    public ResponseEntity<TreinamentoDTO> criar(@RequestBody TreinamentoDTO treinamentoDTO) {
+        TreinamentoDTO treinamentoSalvo = treinamentoService.salvar(treinamentoDTO);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(treinamentoSalvo.id())
+                .toUri();
+        return ResponseEntity.created(location).body(treinamentoSalvo);
     }
 
-    @PutMapping("/treinamentos")
-    @ResponseStatus(HttpStatus.OK)
-    public Treinamento atualizarTreinamento(@RequestBody Treinamento treinamento){
-        return treinamentoService.atualizarTreinamento(treinamento);
+    @PutMapping("/{id}")
+    public ResponseEntity<TreinamentoDTO> atualizar(
+            @PathVariable Long id,
+            @RequestBody TreinamentoDTO treinamentoDTO) {
+        TreinamentoDTO treinamentoAtualizado = treinamentoService.atualizar(id, treinamentoDTO);
+        return ResponseEntity.ok(treinamentoAtualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        treinamentoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

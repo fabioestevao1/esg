@@ -1,13 +1,14 @@
-
 package br.com.fiap.esg.service;
 
+import br.com.fiap.esg.dto.TreinamentoDTO;
+import br.com.fiap.esg.exception.EntityNotFoundException;
 import br.com.fiap.esg.model.Treinamento;
 import br.com.fiap.esg.repository.TreinamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TreinamentoService {
@@ -15,38 +16,60 @@ public class TreinamentoService {
     @Autowired
     private TreinamentoRepository treinamentoRepository;
 
-    public Treinamento salvarTreinamento(Treinamento treinamento){
-        return treinamentoRepository.save(treinamento);
+    public List<TreinamentoDTO> listarTodos() {
+        return treinamentoRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    public Treinamento buscarTreinamento(Long id){
-        Optional<Treinamento> treinamentoOptional = treinamentoRepository.findById(id);
-        if(treinamentoOptional.isPresent()){
-            return treinamentoOptional.get();
-        }else {
-            throw new RuntimeException("Treinamento com ID " + id + " não encontrado.");
+    public TreinamentoDTO buscarPorId(Long id) {
+        return treinamentoRepository.findById(id)
+                .map(this::convertToDTO)
+                .orElseThrow(() -> new EntityNotFoundException("Treinamento não encontrado com ID: " + id));
+    }
+
+    public TreinamentoDTO salvar(TreinamentoDTO treinamentoDTO) {
+        Treinamento treinamento = convertToEntity(treinamentoDTO);
+        Treinamento treinamentoSalvo = treinamentoRepository.save(treinamento);
+        return convertToDTO(treinamentoSalvo);
+    }
+
+    public TreinamentoDTO atualizar(Long id, TreinamentoDTO treinamentoDTO) {
+        return treinamentoRepository.findById(id)
+                .map(existente -> {
+                    Treinamento treinamento = convertToEntity(treinamentoDTO);
+                    treinamento.setId(id);
+                    Treinamento atualizado = treinamentoRepository.save(treinamento);
+                    return convertToDTO(atualizado);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Treinamento não encontrado com ID: " + id));
+    }
+
+    public void deletar(Long id) {
+        if (!treinamentoRepository.existsById(id)) {
+            throw new EntityNotFoundException("Treinamento não encontrado com ID: " + id);
         }
+        treinamentoRepository.deleteById(id);
     }
 
-    public List<Treinamento> buscarTreinamentos(){
-        return treinamentoRepository.findAll();
+    private TreinamentoDTO convertToDTO(Treinamento treinamento) {
+        return new TreinamentoDTO(
+                treinamento.getId(),
+                treinamento.getNome(),
+                treinamento.getDescricao(),
+                treinamento.getDataInicio(),
+                treinamento.getDataFim(),
+                treinamento.isObrigatorio()
+        );
     }
 
-    public void excluirTreinamento(Long id){
-        Optional<Treinamento> treinamentoOptional = treinamentoRepository.findById(id);
-        if(treinamentoOptional.isPresent()){
-            treinamentoRepository.delete(treinamentoOptional.get());
-        } else {
-            throw new RuntimeException("Treinamento com ID " + id + " não encontrado para exclusão.");
-        }
-    }
-
-    public Treinamento atualizarTreinamento(Treinamento treinamento){
-        Optional<Treinamento> treinamentoOptional = treinamentoRepository.findById(treinamento.getIdTreinamento());
-        if(treinamentoOptional.isPresent()){
-            return treinamentoRepository.save(treinamento);
-        } else {
-            throw new RuntimeException("Treinamento com ID " + treinamento.getIdTreinamento() + " não encontrado para atualização.");
-        }
+    private Treinamento convertToEntity(TreinamentoDTO dto) {
+        Treinamento treinamento = new Treinamento();
+        treinamento.setNome(dto.nome());
+        treinamento.setDescricao(dto.descricao());
+        treinamento.setDataInicio(dto.dataInicio());
+        treinamento.setDataFim(dto.dataFim());
+        treinamento.setObrigatorio(dto.obrigatorio() ? 'S' : 'N');
+        return treinamento;
     }
 }

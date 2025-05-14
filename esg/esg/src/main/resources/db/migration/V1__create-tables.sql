@@ -11,6 +11,7 @@ CREATE TABLE tbl_funcionarios (
     id_funcionario NUMBER DEFAULT SEQ_FUNCIONARIOS.nextval PRIMARY KEY,
     nome VARCHAR2(40),
     email VARCHAR2(40),
+    senha VARCHAR2(20),
     telefone VARCHAR2(40),
     idade NUMBER,
     genero VARCHAR2(40),

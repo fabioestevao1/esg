@@ -1,46 +1,56 @@
-
 package br.com.fiap.esg.controller;
 
-import br.com.fiap.esg.model.Funcionario;
+import br.com.fiap.esg.dto.FuncionarioDTO;
 import br.com.fiap.esg.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-// import java.util.List; // Descomente se for usar o método de listar todos
+import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/funcionarios")
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @PostMapping("/funcionarios")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Funcionario adicionarFuncionario(@RequestBody Funcionario funcionario){
-        return funcionarioService.salvarFuncionario(funcionario);
+    @GetMapping
+    public ResponseEntity<List<FuncionarioDTO>> listarTodos() {
+        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodos();
+        return ResponseEntity.ok(funcionarios);
     }
 
-    @GetMapping("/funcionarios/{funcionarioId}")
-    public Funcionario buscarFuncionario(@PathVariable Long funcionarioId){
-        return funcionarioService.buscarFuncionario(funcionarioId);
+    @GetMapping("/{id}")
+    public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Long id) {
+        FuncionarioDTO funcionario = funcionarioService.buscarPorId(id);
+        return ResponseEntity.ok(funcionario);
     }
 
-    // @GetMapping("/funcionarios")
-    // public List<Funcionario> listarFuncionarios(){
-    //     return funcionarioService.buscarFuncionarios();
-    // }
-
-    @DeleteMapping("/funcionarios/{funcionarioId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirFuncionario(@PathVariable Long funcionarioId){
-        funcionarioService.excluirFuncionario(funcionarioId);
+    @PostMapping
+    public ResponseEntity<FuncionarioDTO> criar(@RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO funcionarioSalvo = funcionarioService.salvar(funcionarioDTO);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(funcionarioSalvo.id())
+                .toUri();
+        return ResponseEntity.created(location).body(funcionarioSalvo);
     }
 
-    @PutMapping("/funcionarios")
-    @ResponseStatus(HttpStatus.OK)
-    public Funcionario atualizarFuncionario(@RequestBody Funcionario funcionario){
-        return funcionarioService.atualizarFuncionario(funcionario);
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionarioDTO> atualizar(
+            @PathVariable Long id,
+            @RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO funcionarioAtualizado = funcionarioService.atualizar(id, funcionarioDTO);
+        return ResponseEntity.ok(funcionarioAtualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        funcionarioService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
