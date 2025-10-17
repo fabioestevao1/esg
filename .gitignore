@@ -1,0 +1,10 @@
+# IDE
+.idea/
+*.iml
+
+# build
+target/
+
+# env/secrets
+.env
+.env.*
