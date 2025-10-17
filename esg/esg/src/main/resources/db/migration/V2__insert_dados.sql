@@ -1,23 +1,46 @@
--- Reinicia as SEQUENCES para garantir que os primeiros registros tenham ID 1 e 2
-ALTER SEQUENCE SEQ_FUNCIONARIOS RESTART START WITH 1;
-ALTER SEQUENCE SEQ_TREINAMENTOS RESTART START WITH 1;
+-- V2: inserts iniciais nas tabelas reais do Oracle (idempotente)
 
+-- Funcionários
+INSERT INTO TBL_FUNCIONARIOS (NOME, EMAIL, TELEFONE, IDADE, GENERO, ETNIA, SETOR, CARGO, DATA_ADMISSAO)
+SELECT 'João da Silva','joao@empresa.com','(11) 90000-0001',30,'M','Pardo','Tecnologia','Desenvolvedor', TO_DATE('2023-05-01','YYYY-MM-DD')
+FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM TBL_FUNCIONARIOS WHERE EMAIL = 'joao@empresa.com');
 
-INSERT INTO tbl_funcionarios (nome, email, telefone, idade, genero, etnia, setor, cargo, data_admissao)
-VALUES ('João da Silva', 'joao@empresa.com', '(11) 90000-0001', 35, 'Masculino', 'Pardo', 'Tecnologia', 'Desenvolvedor', TO_DATE('2023-05-01', 'YYYY-MM-DD'));
+INSERT INTO TBL_FUNCIONARIOS (NOME, EMAIL, TELEFONE, IDADE, GENERO, ETNIA, SETOR, CARGO, DATA_ADMISSAO)
+SELECT 'Ana Oliveira','ana@empresa.com','(11) 90000-0002',29,'F','Branca','RH','Analista de Inclusão', TO_DATE('2022-08-15','YYYY-MM-DD')
+FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM TBL_FUNCIONARIOS WHERE EMAIL = 'ana@empresa.com');
 
-INSERT INTO tbl_funcionarios (nome, email, telefone, idade, genero, etnia, setor, cargo, data_admissao)
-VALUES ('Ana Oliveira', 'ana@empresa.com', '(11) 90000-0002', 29, 'Feminino', 'Negra', 'RH', 'Analista de Inclusão', TO_DATE('2022-08-15', 'YYYY-MM-DD'));
+-- Treinamentos
+INSERT INTO TBL_TREINAMENTOS (NOME, DESCRICAO, DATA_INICIO, DATA_FIM, OBRIGATORIO)
+SELECT 'Diversidade nas Empresas','Inclusão e respeito no trabalho', TO_DATE('2024-01-10','YYYY-MM-DD'), TO_DATE('2024-01-12','YYYY-MM-DD'), 'S'
+FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM TBL_TREINAMENTOS WHERE NOME = 'Diversidade nas Empresas');
 
-INSERT INTO tbl_treinamentos (nome, descricao, data_inicio, data_fim, obrigatorio)
-VALUES ('Diversidade nas Empresas', 'Inclusão e respeito no trabalho', TO_DATE('2024-01-10', 'YYYY-MM-DD'), TO_DATE('2024-01-12', 'YYYY-MM-DD'), 'S');
+INSERT INTO TBL_TREINAMENTOS (NOME, DESCRICAO, DATA_INICIO, DATA_FIM, OBRIGATORIO)
+SELECT 'Comunicação Não-Violenta','Oficina de empatia', TO_DATE('2024-03-05','YYYY-MM-DD'), TO_DATE('2024-03-06','YYYY-MM-DD'), 'N'
+FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM TBL_TREINAMENTOS WHERE NOME = 'Comunicação Não-Violenta');
 
-INSERT INTO tbl_treinamentos (nome, descricao, data_inicio, data_fim, obrigatorio)
-VALUES ('Comunicação Não-Violenta', 'Oficina de empatia', TO_DATE('2024-03-05', 'YYYY-MM-DD'), TO_DATE('2024-03-06', 'YYYY-MM-DD'), 'N');
+-- Participações
+INSERT INTO TBL_PARTICIPACAO (DATA_PARTICIPACAO, STATUS, ID_FUNCIONARIO, ID_TREINAMENTO)
+SELECT TO_DATE('2024-01-11','YYYY-MM-DD'), 'Concluído',
+       (SELECT ID_FUNCIONARIO FROM TBL_FUNCIONARIOS WHERE EMAIL = 'joao@empresa.com'),
+       (SELECT ID_TREINAMENTO FROM TBL_TREINAMENTOS WHERE NOME = 'Diversidade nas Empresas')
+FROM DUAL
+WHERE NOT EXISTS (
+  SELECT 1 FROM TBL_PARTICIPACAO P
+  WHERE P.ID_FUNCIONARIO = (SELECT ID_FUNCIONARIO FROM TBL_FUNCIONARIOS WHERE EMAIL = 'joao@empresa.com')
+    AND P.ID_TREINAMENTO = (SELECT ID_TREINAMENTO FROM TBL_TREINAMENTOS WHERE NOME = 'Diversidade nas Empresas')
+);
 
--- Assumindo que os IDs de funcionários e treinamentos inseridos acima são 1 e 2
-INSERT INTO tbl_participacao (data_participacao, status, id_funcionario, id_treinamento)
-VALUES (TO_DATE('2024-01-11', 'YYYY-MM-DD'), 'Concluído', 1, 1);
-
-INSERT INTO tbl_participacao (data_participacao, status, id_funcionario, id_treinamento)
-VALUES (TO_DATE('2024-03-06', 'YYYY-MM-DD'), 'Pendente', 2, 2);
+INSERT INTO TBL_PARTICIPACAO (DATA_PARTICIPACAO, STATUS, ID_FUNCIONARIO, ID_TREINAMENTO)
+SELECT TO_DATE('2024-03-06','YYYY-MM-DD'), 'Pendente',
+       (SELECT ID_FUNCIONARIO FROM TBL_FUNCIONARIOS WHERE EMAIL = 'ana@empresa.com'),
+       (SELECT ID_TREINAMENTO FROM TBL_TREINAMENTOS WHERE NOME = 'Comunicação Não-Violenta')
+FROM DUAL
+WHERE NOT EXISTS (
+  SELECT 1 FROM TBL_PARTICIPACAO P
+  WHERE P.ID_FUNCIONARIO = (SELECT ID_FUNCIONARIO FROM TBL_FUNCIONARIOS WHERE EMAIL = 'ana@empresa.com')
+    AND P.ID_TREINAMENTO = (SELECT ID_TREINAMENTO FROM TBL_TREINAMENTOS WHERE NOME = 'Comunicação Não-Violenta')
+);

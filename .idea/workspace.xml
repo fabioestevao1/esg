@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77e73301-db15-4b51-8e9c-331bc27cc7ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ESG_APP.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/esg.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/esg/esg/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/esg/esg/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/esg/esg/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/esg/esg/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/esg/esg/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/esg/esg/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/esg/esg/src/main/resources/db/migration/V2__insert_dados.sql" beforeDir="false" afterPath="$PROJECT_DIR$/esg/esg/src/main/resources/db/migration/V2__insert_dados.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +34,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/fabioestevao1/ESG_APP.git&quot;,
-    &quot;accountId&quot;: &quot;fefc3c0d-79b3-4c0e-a67c-9c66ca8e6902&quot;
+    &quot;url&quot;: &quot;https://github.com/fabioestevao1/esg.git&quot;,
+    &quot;accountId&quot;: &quot;707c943f-b1be-481d-9005-eca3256b66a5&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -43,27 +48,154 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.EsgApplication.executor": "Run",
+    "Maven.Flyway Info.executor": "Run",
+    "Maven.Flyway Repairesg.executor": "Run",
+    "Maven.esg [flyway:info].executor": "Run",
+    "Maven.esg [flyway:migrate].executor": "Run",
+    "Maven.esg [flyway:repair].executor": "Run",
+    "Maven.esg [org.flywaydb:flyway-maven-plugin:10.20.1:info].executor": "Run",
+    "Maven.esg [org.flywaydb:flyway-maven-plugin:10.20.1:migrate].executor": "Run",
+    "Maven.esg [org.flywaydb:flyway-maven-plugin:10.20.1:repair].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Fabio/OneDrive/Área de Trabalho/PROJECTS/ESG_APP/esg/esg",
+    "last_opened_file_path": "C:/Users/Felix/IdeaProjects/esg",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.poratu.idea.plugins.tomcat.setting.TomcatServersConfigurable",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "File.Encoding",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
-      </set>
-    </attachedChunks>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn flyway:repair" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.EsgApplication">
+    <configuration name="EsgApplication" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="br.com.fiap.esg.EsgApplication" />
+      <module name="esg" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="esg [flyway:info]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="org.flywaydb:flyway-maven-plugin:10.20.1:info" />
+                <option value="-Dflyway.url=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL" />
+                <option value="-Dflyway.user=RM557159" />
+                <option value="-Dflyway.password=190803" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="C:\Users\Felix\IdeaProjects\esg\esg\esg" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="esg [flyway:migrate]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="org.flywaydb:flyway-maven-plugin:10.20.1:migrate" />
+                <option value="-Dflyway.url=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL" />
+                <option value="-Dflyway.user=RM557159" />
+                <option value="-Dflyway.password=190803" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="C:\Users\Felix\IdeaProjects\esg\esg\esg" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="esg [flyway:repair]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="org.flywaydb:flyway-maven-plugin:10.20.1:repair" />
+                <option value="-Dflyway.url=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL" />
+                <option value="-Dflyway.user=RM557159" />
+                <option value="-Dflyway.password=190803" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="C:\Users\Felix\IdeaProjects\esg\esg\esg" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.EsgApplication" />
+      <item itemvalue="Maven.esg [flyway:info]" />
+      <item itemvalue="Maven.esg [flyway:migrate]" />
+      <item itemvalue="Maven.esg [flyway:repair]" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -80,5 +212,20 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="Dockerfile" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.security:spring-security-core" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:org.flywaydb:flyway-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
   </component>
 </project>
