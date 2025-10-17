@@ -19,11 +19,11 @@ O projeto utiliza **Docker** e **Docker Compose** para execução local e orques
 
 ### Passos para execução
 
-1. Clone o repositório:
+1. Baixe o arquivo esg.zip:
 
    ```bash
-   git clone https://github.com/seu-usuario/cidades-esginteligentes.git
-   cd cidades-esginteligentes
+   > descompactar
+   cd esg
    ```
 2. Suba o ambiente de staging:
 
