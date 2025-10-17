@@ -125,7 +125,7 @@ ENTRYPOINT ["java", "-jar", "esg.jar"]
 
 ## 🏁 Conclusão
 
-O projeto **Cidades ESGInteligentes** demonstra domínio prático dos princípios de **DevOps**, integrando automação de build, testes, containerização e deploy em nuvem com versionamento completo.
+O projeto **Esg** demonstra domínio prático dos princípios de **DevOps**, integrando automação de build, testes, containerização e deploy em nuvem com versionamento completo.
 
 A entrega consolida um fluxo profissional de desenvolvimento contínuo, com foco em escalabilidade, qualidade e sustentabilidade tecnológica.
 
